@@ -34,3 +34,47 @@ document.querySelector("#reset").addEventListener("click", () => {
 /* START CODING HERE */
 
 
+document.querySelector("#populationBigger").addEventListener("click", () => {
+  let popResultb = data.filter(city => city.population > 500000);
+  createTableElements(popResultb,"allcities");
+});
+
+document.querySelector("#landAreaLess").addEventListener("click", () => {
+  let landAreaResult = data.filter(city => city.population < 1000);
+  createTableElements(landAreaResult,"allcities");
+});
+
+document.querySelector("#isPopulationLess").addEventListener("click", () => {
+  let lessPop = data.some( less => less.population < 100000)
+  if(lessPop) {
+    alert ("1")
+  } else {
+    alert ("0");
+  }
+});
+
+document.querySelector("#isLandBigger").addEventListener("click", () => {
+  let biggerLand = data.filter(city => city.landArea > 100);
+  if(biggerLand){
+    alert("yep");
+    } else {
+      alert ("no");
+    }
+});
+
+
+let cityName = data.map(cityName => cityName.name);
+let selectCity = document.querySelector(".custom-select");
+cityName.forEach((element)=>{
+  
+  let createCity = document.createElement("option");
+  createCity.setAttribute("value",element);
+  createCity.textContent = element;
+  selectCity.appendChild(createCity);
+
+});
+
+selectCity.addEventListener("change", (e)=> {
+  let selectCities = data.filter(cities =>  e.target.value === cities.name);
+  createTableElements(selectCities, "singlecity");
+});
